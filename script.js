@@ -18,29 +18,27 @@ let currentCategory = "همه";
 
 let products = JSON.parse(localStorage.getItem("cafeProducts")) || [];
 
-function saveProducts(){
-    localStorage.setItem(
-        "cafeProducts",
-        JSON.stringify(products)
-    );
+
+// ذخیره در لوکال
+function saveProducts() {
+    localStorage.setItem("cafeProducts", JSON.stringify(products));
 }
 
-function renderProducts(){
+
+// نمایش محصولات
+function renderProducts() {
 
     productsBox.innerHTML = "";
 
     let list = products;
 
-    if(currentCategory !== "همه"){
-        list = products.filter(
-            p => p.category === currentCategory
-        );
+    if (currentCategory !== "همه") {
+        list = products.filter(p => p.category === currentCategory);
     }
 
-    list.forEach((item,index)=>{
+    list.forEach((item, index) => {
 
         const card = document.createElement("div");
-
         card.className = "card";
 
         card.innerHTML = `
@@ -56,12 +54,8 @@ function renderProducts(){
                     ${Number(item.price).toLocaleString()} تومان
                 </div>
 
-                <button
-                class="deleteBtn"
-                onclick="deleteProduct(${index})">
-
-                حذف محصول
-
+                <button class="deleteBtn" onclick="deleteProduct(${index})">
+                    حذف محصول
                 </button>
 
             </div>
@@ -73,7 +67,8 @@ function renderProducts(){
 
 }
 
-renderProducts();
+
+// ورود به پنل
 adminBtn.onclick = () => {
     adminPanel.style.display = "flex";
 };
@@ -84,97 +79,78 @@ closePanel.onclick = () => {
 
 loginBtn.onclick = () => {
 
-    if(document.getElementById("password").value === PASSWORD){
+    const pass = document.getElementById("password").value;
 
+    if (pass === PASSWORD) {
         adminArea.style.display = "block";
-
         alert("ورود موفق");
-
-    }else{
-
+    } else {
         alert("رمز اشتباه است");
-
     }
 
 };
 
+
+// ثبت محصول (با مسیر عکس)
 saveBtn.onclick = () => {
 
-    if(
-        nameInput.value.trim()==="" ||
-        priceInput.value.trim()==="" ||
-        !imageInput.files.length
-    ){
-
-        alert("همه فیلدها را تکمیل کنید.");
-
+    if (
+        nameInput.value.trim() === "" ||
+        priceInput.value.trim() === "" ||
+        categoryInput.value.trim() === "" ||
+        imageInput.value.trim() === ""
+    ) {
+        alert("همه فیلدها را پر کنید");
         return;
-
     }
 
-    const reader = new FileReader();
+    products.push({
+        name: nameInput.value,
+        price: priceInput.value,
+        category: categoryInput.value,
+        image: imageInput.value
+    });
 
-    reader.onload = function(e){
+    saveProducts();
+    renderProducts();
 
-        products.push({
+    nameInput.value = "";
+    priceInput.value = "";
+    imageInput.value = "";
 
-            name:nameInput.value,
-
-            price:priceInput.value,
-
-            category:categoryInput.value,
-
-            image:e.target.result
-
-        });
-
-        saveProducts();
-
-        renderProducts();
-
-        nameInput.value="";
-        priceInput.value="";
-        imageInput.value="";
-
-        alert("محصول ثبت شد.");
-
-    };
-
-    reader.readAsDataURL(imageInput.files[0]);
+    alert("محصول ثبت شد");
 
 };
 
-function deleteProduct(index){
+
+// حذف محصول
+function deleteProduct(index) {
 
     const pass = prompt("رمز حذف:");
 
-    if(pass !== PASSWORD){
-
-        alert("رمز اشتباه است.");
-
+    if (pass !== PASSWORD) {
+        alert("رمز اشتباه است");
         return;
-
     }
 
-    products.splice(index,1);
+    products.splice(index, 1);
 
     saveProducts();
-
     renderProducts();
-
 }
 
-document.querySelectorAll(".cat").forEach(btn=>{
 
-    btn.onclick = ()=>{
+// دسته‌بندی‌ها
+document.querySelectorAll(".cat").forEach(btn => {
 
-        document
-        .querySelectorAll(".cat")
-        .forEach(c=>c.classList.remove("active"));
+    btn.onclick = () => {
+
+        document.querySelectorAll(".cat")
+        .forEach(c => c.classList.remove("active"));
 
         btn.classList.add("active");
 
-        currentCategory = btn.dataset.category;
+        currentCategory = btn.getAttribute("data-category");
 
         renderProducts();
 
@@ -182,16 +158,6 @@ document.querySelectorAll(".cat").forEach(btn=>{
 
 });
 
-const logo = document.getElementById("logoImage");
-const placeholder = document.getElementById("logoPlaceholder");
 
-logo.onload = () => {
-    placeholder.style.display = "none";
-};
-
-logo.onerror = () => {
-    logo.style.display = "none";
-    placeholder.style.display = "flex";
-};
-
+// اجرای اولیه
 window.addEventListener("load", renderProducts);
