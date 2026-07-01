@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>کافه پرواز</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap"
+rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logoBox">
+
+<div class="logoHolder">
+
+<img
+id="logoImage"
+src="logo.png"
+alt="Logo"
+onerror="this.style.display='none';">
+
+<div id="logoPlaceholder">
+
+لوگو
+
+</div>
+
+</div>
+
+<h1>
+
+کافه پرواز
+
+</h1>
+
+<p>
+
+شرکت هوانوردی عقاب آسمان شمال
+
+</p>
+
+</div>
+
+</header>
+
+<section class="categories">
+
+<button class="cat active"
+data-category="همه">
+
+همه
+
+</button>
+
+<button class="cat"
+data-category="نوشیدنی‌های گرم بر پایه قهوه">
+
+نوشیدنی‌های گرم بر پایه قهوه
+
+</button>
+
+<button class="cat"
+data-category="نوشیدنی‌های سرد بر پایه قهوه">
+
+نوشیدنی‌های سرد بر پایه قهوه
+
+</button>
+
+<button class="cat"
+data-category="نوشیدنی‌های گرم">
+
+نوشیدنی‌های گرم
+
+</button>
+
+<button class="cat"
+data-category="نوشیدنی‌های شرکتی">
+
+نوشیدنی‌های شرکتی
+
+</button>
+
+<button class="cat"
+data-category="تنقلات">
+
+تنقلات
+
+</button>
+
+<button class="cat"
+data-category="صبحانه">
+
+صبحانه
+
+</button>
+
+<button class="cat"
+data-category="سایر">
+
+سایر
+
+</button>
+
+</section>
+
+<main>
+
+<div id="products">
+
+</div>
+
+</main>
+
+<button id="adminBtn">
+
+⚙
+
+</button>
+
+<div id="adminPanel">
+
+<div class="panel">
+
+<h2>
+
+مدیریت
+
+</h2>
+
+<input
+type="password"
+id="password"
+placeholder="رمز مدیریت">
+
+<button id="login">
+
+ورود
+
+</button>
+
+<div id="adminArea">
+
+<input
+type="text"
+id="productName"
+placeholder="نام محصول">
+
+<input
+type="number"
+id="productPrice"
+placeholder="قیمت">
+
+<select id="productCategory">
+
+<option>
+نوشیدنی‌های گرم بر پایه قهوه
+</option>
+
+<option>
+نوشیدنی‌های سرد بر پایه قهوه
+</option>
+
+<option>
+نوشیدنی‌های گرم
+</option>
+
+<option>
+نوشیدنی‌های شرکتی
+</option>
+
+<option>
+تنقلات
+</option>
+
+<option>
+صبحانه
+</option>
+
+<option>
+سایر
+</option>
+
+</select>
+
+<input
+type="file"
+id="productImage"
+accept="image/*">
+
+<button id="saveProduct">
+
+ثبت محصول
+
+</button>
+
+</div>
+
+<button id="closePanel">
+
+بستن
+
+</button>
+
+</div>
+
+</div>
+  <section class="videoSection">
+
+<div class="videoHolder">
+
+<video
+id="cafeVideo"
+controls
+playsinline>
+
+<source
+src="video.mp4"
+type="video/mp4">
+
+</video>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© کافه پرواز
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
